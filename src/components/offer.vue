@@ -55,6 +55,7 @@
           <div class="col-2" style ='background-color: #eeeeee;' v-if="viewPanel">
               <div class="row" style="padding: 5px;">
                 <h6>Панель сборки</h6>
+                <open></open>
                 <find-client></find-client>              
                 <hr>
                 <find-product></find-product>
@@ -95,6 +96,8 @@ import Products from './products'
 import AddText from './add-text'
 import Course from './course'
 import SaveAs from './save-as'
+import Open from './open'
+
 export default {
   name: 'offer',
   components: {
@@ -106,7 +109,8 @@ export default {
     'products': Products,
     'add-text': AddText,
     'course': Course,
-    'save-as': SaveAs
+    'save-as': SaveAs,
+    'open': Open
   },
   data () {
     return {
