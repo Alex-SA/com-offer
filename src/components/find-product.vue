@@ -51,7 +51,7 @@
                      obj.uah = Math.round(obj.price3 * this.$store.state.course_eur)
                      obj.showPrice = obj.uah
                      obj.showPrice = obj.showPrice + 'грн. (' + obj.price3 + 'EUR)'
-                     obj.currency = ''
+                     // obj.currency = ''
                    } else if (obj.currency === 'UAH') {
                      obj.showPrice = obj.price3
                      obj.uah = obj.price3

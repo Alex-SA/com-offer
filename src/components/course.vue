@@ -63,6 +63,12 @@
       },
       changeEUR () {
         this.$store.state.course_eur = this.eur
+        this.$store.state.addedProducts.forEach(function (item, i, arr) {
+          console.log(item)
+          if (item.currency === 'EURO') {
+            console.log(item.pid)
+          }
+        })
       },
       changeUSD () {
         this.$store.state.course_usd = this.usd
