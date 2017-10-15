@@ -133,10 +133,10 @@ export default {
   },
   methods: {
     showViewText () {
-      this.$store.state.viewAddText = this.viewText
+      this.$store.state.viewAddText = !this.viewText
     },
     showDelProduct () {
-      this.$store.state.viewDelProduct = this.delProduct
+      this.$store.state.viewDelProduct = !this.delProduct
     }
 
   }

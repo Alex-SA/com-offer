@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  // import axios from 'axios'
+  import axios from 'axios'
   export default {
     name: 'save-as',
     data () {
@@ -37,26 +37,24 @@
         }
         console.log(this.json_data)
 
-      //   axios.post('http://brandline.com.ua/cgi-bin/api.pl',
-      //     {
-      //       params: {
-      //         q: 'save',
-      //         name: this.save
-      //         data: this.json_data
-      //       }
-      //     })
-      //     .then(
-      //        response => {
-      //          console.log(response.data)
-      //          alert('Уже в базе!')
-      //        }
-      //      )
-      //     .catch(function (error) {
-      //       console.log(error)
-      //     })
-      // }
+        axios.post('http://brandline.com.ua/cgi-bin/api.pl',
+          {
+            params: {
+              q: 'save',
+              name: this.save,
+              data: this.json_data
+            }
+          })
+          .then(
+             response => {
+               console.log(response.data)
+               alert('Уже в базе!')
+             }
+           )
+          .catch(function (error) {
+            console.log(error)
+          })
       }
-
     }
   }
 </script>  
