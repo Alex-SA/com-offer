@@ -63,15 +63,30 @@
       },
       changeEUR () {
         this.$store.state.course_eur = this.eur
+        var self = this
         this.$store.state.addedProducts.forEach(function (item, i, arr) {
-          console.log(item)
           if (item.currency === 'EURO') {
-            console.log(item.pid)
+            item.uah = item.price3 * self.eur
+            item.showPrice = item.uah + 'грн. (' + item.price3 + 'EUR)'
+            self.$store.state.total_price = self.$store.state.addedProducts.reduce(function (sum, current) {
+              return sum + parseInt(current.uah) * current.cnt
+            }, 0)
           }
+          // console.log(item)
         })
       },
       changeUSD () {
         this.$store.state.course_usd = this.usd
+        var self = this
+        this.$store.state.addedProducts.forEach(function (item, i, arr) {
+          if (item.currency === '') {
+            item.uah = Math.round(item.price3 * self.usd)
+            item.showPrice = item.uah + 'грн. (' + item.price3 + 'USD)'
+            self.$store.state.total_price = self.$store.state.addedProducts.reduce(function (sum, current) {
+              return sum + parseInt(current.uah) * current.cnt
+            }, 0)
+          }
+        })
       }
     }
   }

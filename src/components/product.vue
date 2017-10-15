@@ -12,7 +12,7 @@
     </td>
 	  <td>{{ oneProduct['title'] }}</td>
 	  <td align="left" style="font-size: 0.6em;">{{ oneProduct['smalltext'] }}</td>
-	  <td>{{ oneProduct['showPrice'] }} {{ oneProduct['currency'] }}</td>
+	  <td>{{ oneProduct['showPrice'] }} </td>
     <td>{{ oneProduct['cnt'] }}</td>
     <td>{{ oneProduct['cnt'] * oneProduct['uah'] }} грн.</td>
 	</tr>
@@ -50,7 +50,7 @@
             return obj.pid !== id
           })
           this.$store.state.total_price = this.$store.state.addedProducts.reduce(function (sum, current) {
-            return sum + parseInt(current.uah)
+            return sum + parseInt(current.uah) * current.cnt
           }, 0)
           console.log(this.$store.state.total_price)
         }
