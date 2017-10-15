@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8">
       <span class="float-left">
-        <h2>Группа компаний «БРЕНД-ЛАЙН»</h2>
+        <h3>Группа компаний «БРЕНД-ЛАЙН»</h3>
       </span>
       <h6>
         <span class="float-left">

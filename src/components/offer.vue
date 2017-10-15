@@ -42,7 +42,8 @@
                 <span class="float-right hf08" >
                   {{ clientInfo }} 
                 </span>                
-              </div>  
+              </div>
+              <add-text></add-text>
             </div>
             <div class="row">
                 <products></products>
@@ -57,6 +58,23 @@
                 <find-client></find-client>              
                 <hr>
                 <find-product></find-product>
+                
+
+                <span class="float-left chtl">
+                  <input type="checkbox" name="delProduct" v-model="delProduct" @click="showDelProduct"> 
+                  <small>Удаление товаров</small>
+                </span>
+
+                <span class="float-left chtl">
+                  <input type="checkbox" name="addText" v-model="viewText" @click="showViewText"> 
+                  <small>Tекст-комментарий</small>
+                </span>
+                <span class="float-left chtl">
+                  <course></course>
+                </span>
+                <span class="float-left chtl">
+                  <save-as></save-as>
+                </span>
             </div>
           </div>
         </div>
@@ -74,7 +92,9 @@ import NumDate from './num-date'
 import Header from './header'
 import Footer from './footer'
 import Products from './products'
-
+import AddText from './add-text'
+import Course from './course'
+import SaveAs from './save-as'
 export default {
   name: 'offer',
   components: {
@@ -83,10 +103,16 @@ export default {
     'num-date': NumDate,
     'app-header': Header,
     'app-footer': Footer,
-    'products': Products
+    'products': Products,
+    'add-text': AddText,
+    'course': Course,
+    'save-as': SaveAs
   },
   data () {
     return {
+      viewText: this.$store.state.viewAddText,
+      delProduct: this.$store.state.viewDelProduct,
+      editText: false
     }
   },
   computed: {
@@ -104,6 +130,15 @@ export default {
     clientNameUc () {
       return this.$store.getters.modifyClientName
     }
+  },
+  methods: {
+    showViewText () {
+      this.$store.state.viewAddText = this.viewText
+    },
+    showDelProduct () {
+      this.$store.state.viewDelProduct = this.delProduct
+    }
+
   }
 }
 </script>
@@ -119,5 +154,7 @@ export default {
   span.hf08 {
     font-size: 0.8em;
   }
-  
+  span.chtl {
+    padding: 15px 10px 0px 10px;
+  }
 </style>

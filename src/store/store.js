@@ -8,15 +8,28 @@ export const store = new Vuex.Store({
     clientNameStore: '2222 ХХХХХХХХХХХ     ХХХХХХХХХХХХХ ',
     clientInfoStore: '3333 вул. О. Гончара 57б, 5 поверх. (063)1763610, Anastasia.Samokysh@labour-centre.com',
     viewPanel: true,
+    viewAddText: false,
+    viewDelProduct: false,
     arNumDate: {
       'co': 'ххх/хх от ',
       'on': 'х-хх.х/ххххх от ',
       'out': 'ххх/хх от ',
+      'boss': '_____________',
+      'sign': '_____________________',
+      'manager': '_________________',
+      'contacts': '______________________________',
       'mounted': false
     },
-    addedProducts: []
+    addedText: 'Добавить текст',
+    addedProducts: [],
+    course_eur: 1,
+    course_usd: 1,
+    total_price: 0
   },
   getters: {
+    // viewText: state => {
+    //   return state.
+    // },
     viewPanel: state => {
       return state.viewPanel
     },

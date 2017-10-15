@@ -26,10 +26,11 @@
   export default {
     name: 'num-date',
     props: {
-      inNumDate: ''
+      inNumDate: '',
+      fromFooter: false
     },
     mounted: function () {
-      if (!this.$store.state.arNumDate['mounted']) {
+      if (!this.$store.state.arNumDate['mounted'] && !this.fromFooter) {
         this.$nextTick(function () {
           this.formatDate()
           this.NumDate += this.formatDay
@@ -60,6 +61,9 @@
       },
       onFinishEdit () {
         this.editNumDate = false
+        if (!this.NumDate.trim()) {
+          this.NumDate = this.$store.state.arNumDate[this.inNumDate]
+        }
         this.$store.state.arNumDate[this.inNumDate] = this.NumDate
       }
     }

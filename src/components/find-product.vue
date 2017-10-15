@@ -37,7 +37,31 @@
                var obj = response.data.ONE
                console.log(obj)
                if (obj.cnt > 0) {
-                 this.$store.state.addedProducts.push(obj)
+                 var myArr = this.$store.state.addedProducts
+                 var indexOfProduct = myArr.findIndex(x => x.pid === obj.pid)
+                 if (indexOfProduct >= 0) {
+                   this.$store.state.addedProducts[indexOfProduct].cnt += 1
+                   this.$store.state.total_price += parseInt(this.$store.state.addedProducts[indexOfProduct].uah)
+                 } else {
+                   if (obj.currency === '') {
+                     obj.uah = Math.round(obj.price3 * this.$store.state.course_usd)
+                     obj.showPrice = obj.uah
+                     obj.showPrice = obj.showPrice + 'грн. (' + obj.price3 + '$)'
+                   } else if (obj.currency === 'EURO') {
+                     obj.uah = Math.round(obj.price3 * this.$store.state.course_eur)
+                     obj.showPrice = obj.uah
+                     obj.showPrice = obj.showPrice + 'грн. (' + obj.price3 + 'EUR)'
+                     obj.currency = ''
+                   } else if (obj.currency === 'UAH') {
+                     obj.showPrice = obj.price3
+                     obj.uah = obj.price3
+                     obj.currency = 'грн.'
+                   }
+                   obj.cnt = 1
+                   this.$store.state.total_price += parseInt(obj.uah)
+                   this.$store.state.addedProducts.push(obj)
+                 }
+                 console.log(this.$store.state.total_price)
                }
              }
            )
