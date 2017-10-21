@@ -22,6 +22,7 @@ export const store = new Vuex.Store({
     },
     addedText: 'Добавить текст',
     addedProducts: [],
+    offers: [],
     course_eur: 1,
     course_usd: 1,
     total_price: 0

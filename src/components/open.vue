@@ -6,7 +6,7 @@
         v-model="offer"
         @change="onSelectOffer"
       >
-        <option v-for="item in offers" name="item.id">{{item.name}}</option>
+        <option v-for="item in offers" :name="item.id">{{item.name}}</option>
       </select>
       <small id="offersHelp" class="form-text text-muted">
         Выберете предложение для загрузки
@@ -21,8 +21,13 @@
     name: 'open',
     data () {
       return {
-        offers: [],
+        // offers: [],
         offer: 0
+      }
+    },
+    computed: {
+      offers () {
+        return this.$store.state.offers
       }
     },
     mounted: function () {
@@ -30,39 +35,30 @@
     },
     methods: {
       GetOffers () {
-        this.offers = [
+        axios.get('http://brandline.com.ua/cgi-bin/api.pl',
           {
-            id: 1,
-            name: 'One'
-          },
-          {
-            id: 2,
-            name: 'Two'
-          }
-        ]
-        // axios.get('http://brandline.com.ua/cgi-bin/api.pl',
-        //   {
-        //     params: {
-        //       q: 'select',
-        //       id: 0
-        //     }
-        //   })
-        //   .then(
-        //      response => {
-        //        this.offers = response.data.ONE
-        //        console.log(this.offers)
-        //      }
-        //    )
-        //   .catch(function (error) {
-        //     console.log(error)
-        //   })
+            params: {
+              q: 'select',
+              id: 0
+            }
+          })
+          .then(
+             response => {
+               console.log(response.data.ONE.select)
+               // this.offers = response.data.ONE.select
+               this.$store.state.offers = response.data.ONE.select
+             }
+           )
+          .catch(function (error) {
+            console.log(error)
+          })
       },
       onSelectOffer () {
         axios.get('http://brandline.com.ua/cgi-bin/api.pl',
           {
             params: {
               q: 'select',
-              id: this.offer
+              search: this.offer
             }
           })
           .then(

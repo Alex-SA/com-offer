@@ -35,19 +35,30 @@
           'addedText': this.$store.state.addedText,
           'pid': productsPID
         }
-        console.log(this.json_data)
-
-        axios.post('http://brandline.com.ua/cgi-bin/api.pl',
-          {
-            params: {
-              q: 'save',
-              name: this.save,
-              data: this.json_data
-            }
-          })
+        // console.log(this.json_data)
+        var headers = {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        var params = {
+          q: 'save',
+          name: this.save,
+          data: this.json_data
+        }
+        var self = this
+        axios.post('http://brandline.com.ua/cgi-bin/api.pl', params, headers)
+        // axios.post('http://brandline.com.ua/cgi-bin/api.pl',
+        //   {
+        //     params: {
+        //       q: 'save',
+        //       name: this.save,
+        //       data: this.json_data
+        //     }
+        //   })
           .then(
              response => {
-               console.log(response.data)
+               var id = response.data.ONE.id
+               console.log(response.data.ONE.id)
+               self.$store.state.offers.push({'id': id, 'name': self.save})
                alert('Уже в базе!')
              }
            )
