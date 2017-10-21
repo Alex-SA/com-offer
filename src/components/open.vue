@@ -63,10 +63,33 @@
           })
           .then(
              response => {
-               var obj = response.data.ONE
+               var $ = window.jQuery = require('jquery')
+               var obj = response.data.ONE.data
                console.log(obj)
-               // this.$store.state.clientNameStore = obj['company']
-               // this.$store.state.clientInfoStore = obj['adress'] + '; ' + obj['phone'] + '; ' + obj['email']
+               this.$store.state.addedProducts = []
+               this.$store.state.total_price = 0
+               this.$store.state.addedText = obj.addedText
+               this.$store.state.clientNameStore = obj.clientNameStore
+               this.$store.state.clientInfoStore = obj.clientInfoStore
+               this.$store.state.arNumDate['co'] = obj.NumDate.co
+               this.$store.state.arNumDate['out'] = obj.NumDate.out
+               this.$store.state.arNumDate['on'] = obj.NumDate.on
+               this.$store.state.arNumDate['boss'] = obj.NumDate.boss
+               this.$store.state.arNumDate['sign'] = obj.NumDate.sign
+               this.$store.state.arNumDate['manager'] = obj.NumDate.manager
+               this.$store.state.arNumDate['contacts'] = obj.NumDate.contacts
+               var self = this
+               obj.pid.forEach(function (element) {
+                 if (element.pid) {
+                   console.log(element.pid)
+                   for (var i = 1; i <= element.cnt; i++) {
+                     self.$store.state.loadProductPid = element.pid
+                     $('#inputProductsPid').val(element.pid)
+                     $('#addProductToOffer').trigger('click')
+                     self.$store.state.loadProductPid = 0
+                   }
+                 }
+               })
              }
            )
           .catch(function (error) {

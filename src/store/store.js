@@ -25,7 +25,8 @@ export const store = new Vuex.Store({
     offers: [],
     course_eur: 1,
     course_usd: 1,
-    total_price: 0
+    total_price: 0,
+    loadProductPid: 0
   },
   getters: {
     // viewText: state => {

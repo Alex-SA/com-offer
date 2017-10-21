@@ -2,13 +2,13 @@
 	<form @submit.prevent="onGetProduct" >
 	  <div class="form-group">
 	    <label for="pn">Добавить товар</label>
-	      <input class="form-control" id="product" name="product" aria-describedby="productHelp" placeholder="Указать клиента"
+	      <input class="form-control" id="inputProductsPid" name="product" aria-describedby="productHelp" placeholder="Указать код"
 	      v-model="product">
 	      <small id="productHelp" class="form-text text-muted">
 	        Укажите артикул товара, чтобы бодавить его в компредложение
 	      </small>
 	  </div>
-	  <button type="submit" class="btn btn-outline-primary btn-sm">Добавить</button>
+	  <button type="submit" id="addProductToOffer" class="btn btn-outline-primary btn-sm">Добавить</button>
 	</form>
 
 </template>
@@ -25,6 +25,9 @@
     },
     methods: {
       onGetProduct () {
+        if (this.$store.state.loadProductPid > 0) {
+          this.product = this.$store.state.loadProductPid
+        }
         axios.get('http://brandline.com.ua/cgi-bin/api.pl',
           {
             params: {

@@ -10,8 +10,8 @@
       	style="width:100%;"
       	v-on:keyup.esc="pressEsc"
       	v-on:blur="changeText()"
-      	v-model="addingText"
-      >{{addingText}}</textarea>
+      	v-model="editAddingText"
+      >{{editAddingText}}</textarea>
       <span class="float-left" @click="editAddText" v-if="!editText" v-html="addingText"></span>
   	</span>
   </div>                
@@ -25,7 +25,7 @@
     name: 'add-text',
     data () {
       return {
-        addingText: this.$store.state.addedText,
+        editAddingText: this.$store.state.addedText,
         editText: false
       }
     },
@@ -35,11 +35,15 @@
       },
       editTextArea () {
         return this.editText
+      },
+      addingText () {
+        return this.$store.state.addedText
       }
     },
     methods: {
       changeText () {
-        this.$store.state.addedText = this.addingText
+        this.$store.state.addedText = this.editAddingText
+        // this.addingText = this.editAddingText
         this.editText = !this.editText
       },
       pressEsc () {
@@ -56,6 +60,7 @@
         })
       },
       editAddText () {
+        this.editAddingText = this.addingText
         this.editText = !this.editText
         this.setFocus(this)
       }

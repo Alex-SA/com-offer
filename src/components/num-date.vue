@@ -14,7 +14,7 @@
       v-on:click="NumDateEdit()"
       v-if="!editNumDate"
     > 
-      {{NumDate}} 
+      {{spanNumDate}} 
     </span>
   </span>
 </template>
@@ -45,12 +45,18 @@
         NumDate: this.$store.state.arNumDate[this.inNumDate]
       }
     },
+    computed: {
+      spanNumDate () {
+        return this.$store.state.arNumDate[this.inNumDate]
+      }
+    },
     methods: {
       formatDate: function () {
         moment.locale('uk')
         this.formatDay = moment().format('l')
       },
       NumDateEdit: function () {
+        this.NumDate = this.spanNumDate
         this.editNumDate = true
         this.setFocus(this)
       },
